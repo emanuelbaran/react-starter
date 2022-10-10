@@ -1,10 +1,14 @@
 import { FC } from "react"
 import { ICountry } from "../../App"
 
-const Country: FC<ICountry> = ({ name, capital, population, isEUMember }) => {
+interface CountryProps extends ICountry {
+  removeCountry(name: string): void
+}
+
+const Country: FC<CountryProps> = ({ name, capital, population, isEUMember, removeCountry }) => {
   return (
     <div className="bg-slate-400 p-4 rounded-md">
-      <button>X</button>
+      <button onClick={() => removeCountry(name)}>X</button>
       <h1 className="text-2xl font-bold">{name}</h1>
       <h3 className="text-l font-semibold mb-4">{capital}</h3>
       <span>Population: {Intl.NumberFormat("ro-RO", {
